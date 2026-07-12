@@ -1,0 +1,2990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On The Rocks | Coffee Bar & Cocktail Lounge | Brooklyn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Italiana&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Day Mode Colors (Default) */
+        :root {
+            --gold: #C9A961;
+            --gold-bright: #E0C989;
+            --gold-dark: #8B7340;
+            --gold-deep: #6B5530;
+            --black: #0A0807;
+            --black-soft: #16120F;
+            --black-card: #1C1814;
+            --black-elevated: #251F18;
+            --cream: #F5EFE0;
+            --cream-soft: #E8DFC8;
+            --warm-white: #FBF7EC;
+            --smoke: rgba(245, 239, 224, 0.65);
+            --bronze: #8B6F3F;
+            --subtle-line: rgba(201, 169, 97, 0.3);
+        }
+
+        /* Night Mode Colors (Activated on scroll) */
+        body.night-mode {
+            --gold: #FFB800;
+            --gold-bright: #FFD54F;
+            --gold-dark: #FF9500;
+            --gold-deep: #C77B00;
+            --black: #0A0612;
+            --black-soft: #14091F;
+            --black-card: #1A0F2E;
+            --black-elevated: #251938;
+            --cream: #F8F4FF;
+            --cream-soft: #E8D9FF;
+            --warm-white: #FBF7FF;
+            --smoke: rgba(248, 244, 255, 0.7);
+            --bronze: #9D4EDD;
+            --subtle-line: rgba(255, 184, 0, 0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+            font-weight: 300;
+            transition: background 1.2s ease, color 1.2s ease;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-bright));
+            z-index: 10000;
+            width: 0%;
+            transition: width 0.1s ease, background 1s ease;
+            box-shadow: 0 0 8px var(--gold);
+        }
+
+        /* Subtle Pattern Background */
+        .pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.025;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A961'%3E%3Cpath d='M30 0L37 10L30 20L23 10zM30 40L37 50L30 60L23 50zM0 30L10 23L20 30L10 37zM40 30L50 23L60 30L50 37z'/%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E");
+            transition: opacity 1.2s ease;
+        }
+
+        body.night-mode .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFB800'%3E%3Cpath d='M30 0L37 10L30 20L23 10zM30 40L37 50L30 60L23 50zM0 30L10 23L20 30L10 37zM40 30L50 23L60 30L50 37z'/%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.04;
+        }
+
+        /* Music Note Particles */
+        .music-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .music-note {
+            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            opacity: 0;
+            color: var(--gold);
+            animation: noteFloat 25s infinite;
+            transition: color 1.2s ease;
+        }
+
+        @keyframes noteFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-150px) rotate(540deg); opacity: 0; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.4rem 5%;
+            background: rgba(10, 8, 7, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--subtle-line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            background: rgba(10, 6, 18, 0.98);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            animation: fadeInLeft 1s ease-out 0.3s both;
+            z-index: 1002;
+        }
+
+        @keyframes fadeInLeft {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--black);
+            border: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        body.night-mode .logo-icon {
+            box-shadow: 0 0 20px rgba(255, 184, 0, 0.4);
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border: 1px solid var(--gold);
+            opacity: 0.4;
+            transition: opacity 0.5s ease;
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.05);
+        }
+
+        body.night-mode .logo-icon:hover {
+            box-shadow: 0 0 30px var(--gold);
+        }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            color: var(--warm-white);
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            transition: color 1.2s ease, text-shadow 0.5s ease;
+        }
+
+        body.night-mode .logo-text {
+            text-shadow: 0 0 10px rgba(255, 184, 0, 0.4);
+        }
+
+        .logo-subtitle {
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 0.85rem;
+            display: block;
+            letter-spacing: 1px;
+            margin-top: -3px;
+            font-weight: 400;
+            transition: color 1.2s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.8rem;
+            list-style: none;
+        }
+
+        .nav-links li {
+            animation: fadeInDown 0.8s ease-out both;
+        }
+
+        .nav-links li:nth-child(1) { animation-delay: 0.4s; }
+        .nav-links li:nth-child(2) { animation-delay: 0.5s; }
+        .nav-links li:nth-child(3) { animation-delay: 0.6s; }
+        .nav-links li:nth-child(4) { animation-delay: 0.7s; }
+        .nav-links li:nth-child(5) { animation-delay: 0.8s; }
+        .nav-links li:nth-child(6) { animation-delay: 0.9s; }
+
+        @keyframes fadeInDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            position: relative;
+            display: inline-block;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* RESERVE BUTTON - FIXED ANIMATIONS */
+        .reserve-btn {
+            position: relative;
+            background: transparent;
+            color: var(--gold);
+            padding: 0.85rem 2rem;
+            border: 1.5px solid var(--gold);
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            text-decoration: none;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInRight 1s ease-out 0.5s both;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInRight {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Fill animation layer */
+        .reserve-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transform: translateX(-101%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        /* Shine sweep */
+        .reserve-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                transparent 100%);
+            transition: left 0.7s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .reserve-btn span {
+            position: relative;
+            z-index: 3;
+            transition: color 0.5s ease;
+        }
+
+        .reserve-btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .reserve-btn:hover::after {
+            left: 100%;
+        }
+
+        .reserve-btn:hover {
+            color: var(--black);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(201, 169, 97, 0.3);
+        }
+
+        body.night-mode .reserve-btn:hover {
+            box-shadow: 0 4px 25px var(--gold);
+        }
+
+        body.night-mode .reserve-btn:hover::before {
+            background: var(--gold-bright);
+        }
+
+        /* Burger Menu */
+        .burger {
+            display: none;
+            width: 48px;
+            height: 48px;
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            cursor: pointer;
+            position: relative;
+            z-index: 1002;
+            transition: all 0.3s ease;
+        }
+
+        .burger:hover {
+            background: rgba(201, 169, 97, 0.1);
+            transform: scale(1.05);
+        }
+
+        body.night-mode .burger:hover {
+            background: rgba(255, 184, 0, 0.15);
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        .burger-lines {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 22px;
+            height: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .burger-line {
+            display: block;
+            width: 100%;
+            height: 1.5px;
+            background: var(--gold);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-origin: center;
+        }
+
+        .burger.active .burger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+            background: var(--black);
+        }
+
+        .burger.active .burger-line:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .burger.active .burger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+            background: var(--black);
+        }
+
+        .burger.active {
+            background: var(--gold);
+            transform: rotate(180deg);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--black) 0%, var(--black-soft) 100%);
+            border-left: 1.5px solid var(--gold);
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+            padding: 6rem 2.5rem 2.5rem;
+            overflow-y: auto;
+            box-shadow: -10px 0 50px rgba(0, 0, 0, 0.7);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .mobile-menu-tagline {
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-menu-subtitle {
+            color: var(--cream);
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 0.2rem;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.active .mobile-nav-links li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-menu.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.2s; }
+        .mobile-menu.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.3s; }
+        .mobile-menu.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.4s; }
+        .mobile-menu.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.5s; }
+        .mobile-menu.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.6s; }
+        .mobile-menu.active .mobile-nav-links li:nth-child(6) { transition-delay: 0.7s; }
+        .mobile-menu.active .mobile-nav-links li:nth-child(7) { transition-delay: 0.8s; }
+        .mobile-menu.active .mobile-nav-links li:nth-child(8) { transition-delay: 0.9s; }
+        .mobile-menu.active .mobile-nav-links li:nth-child(9) { transition-delay: 1.0s; }
+
+        .mobile-nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            display: block;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--subtle-line);
+            transition: all 0.3s;
+        }
+
+        .mobile-nav-links a:hover,
+        .mobile-nav-links a.active {
+            color: var(--gold);
+            padding-left: 1rem;
+        }
+
+        .mobile-nav-links a .number {
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-family: 'Inter', sans-serif;
+            margin-right: 1rem;
+            opacity: 0.5;
+            letter-spacing: 2px;
+        }
+
+        .mobile-menu-footer {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--subtle-line);
+            text-align: center;
+        }
+
+        .mobile-menu-cta {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--black);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+            transition: all 0.4s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-menu-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .mobile-menu-cta:hover::before {
+            left: 100%;
+        }
+
+        .mobile-menu-cta:hover {
+            background: var(--gold-bright);
+            transform: translateY(-2px);
+        }
+
+        body.night-mode .mobile-menu-cta:hover {
+            box-shadow: 0 4px 20px var(--gold);
+        }
+
+        .menu-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s;
+        }
+
+        .menu-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Image Placeholder */
+        .img-placeholder {
+            background: linear-gradient(135deg, var(--black-soft) 0%, var(--black-elevated) 100%);
+            border: 1px dashed var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        body.night-mode .img-placeholder {
+            border-color: var(--gold);
+        }
+
+        .img-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.08), transparent);
+            transition: left 0.8s;
+        }
+
+        .img-placeholder:hover::before {
+            left: 100%;
+        }
+
+        .img-placeholder:hover {
+            border-color: var(--gold-bright);
+        }
+
+        .img-placeholder-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+        }
+
+        .img-placeholder-text {
+            color: var(--cream);
+            font-size: 0.85rem;
+            font-weight: 400;
+            text-align: center;
+            padding: 0 1rem;
+            letter-spacing: 1px;
+        }
+
+        .img-placeholder-sub {
+            color: var(--smoke);
+            font-size: 0.72rem;
+            margin-top: 0.4rem;
+            font-style: italic;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-bg-image .img-placeholder {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 50%, var(--black-elevated) 100%);
+        }
+
+        .hero-bg-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at top, rgba(201, 169, 97, 0.15) 0%, transparent 50%),
+                rgba(10, 8, 7, 0.75);
+        }
+
+        body.night-mode .hero-bg-image::after {
+            background: 
+                radial-gradient(ellipse at top, rgba(255, 184, 0, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(157, 78, 221, 0.2) 0%, transparent 50%),
+                rgba(10, 6, 18, 0.75);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+        }
+
+        .hero-day-night {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease-out 0.3s both;
+            flex-wrap: wrap;
+        }
+
+        .hero-time-slot {
+            text-align: center;
+            color: var(--cream);
+        }
+
+        .hero-time-icon {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-time-label {
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 1.1rem;
+            transition: color 1.2s ease;
+        }
+
+        .hero-time-divider {
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: background 1.2s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            color: var(--warm-white);
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            letter-spacing: 8px;
+            animation: fadeInUp 1s ease-out 0.7s both;
+            transition: color 1.2s ease, text-shadow 0.5s ease;
+        }
+
+        body.night-mode .hero h1 {
+            text-shadow: 0 0 40px rgba(255, 184, 0, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.9s both;
+            letter-spacing: 1px;
+            transition: color 1.2s ease;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--cream-soft);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 1s both;
+            letter-spacing: 1px;
+            transition: color 1.2s ease;
+        }
+
+        .hero-rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            transition: color 1.2s ease;
+        }
+
+        .rating-text {
+            color: var(--cream);
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .rating-text strong {
+            color: var(--gold);
+            font-weight: 500;
+            transition: color 1.2s ease;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 1.4s both;
+        }
+
+        /* BUTTON PRIMARY - FIXED ANIMATIONS */
+        .btn-primary {
+            position: relative;
+            background: var(--gold);
+            color: var(--black);
+            padding: 1.1rem 2.8rem;
+            border: 1.5px solid var(--gold);
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-block;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.7s ease;
+            z-index: 1;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--gold-bright);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-primary span,
+        .btn-primary {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-bright);
+            border-color: var(--gold-bright);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 169, 97, 0.4);
+        }
+
+        body.night-mode .btn-primary {
+            box-shadow: 0 0 20px rgba(255, 184, 0, 0.3);
+        }
+
+        body.night-mode .btn-primary:hover {
+            background: var(--gold-bright);
+            box-shadow: 0 8px 35px var(--gold), 0 0 50px rgba(255, 184, 0, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover::after {
+            width: 350px;
+            height: 350px;
+        }
+
+        /* BUTTON SECONDARY - FIXED ANIMATIONS */
+        .btn-secondary {
+            position: relative;
+            background: transparent;
+            color: var(--gold);
+            padding: 1.1rem 2.8rem;
+            border: 1.5px solid var(--gold);
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: inline-block;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+
+        /* Fill animation */
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transform: translateX(-101%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        /* Shine sweep */
+        .btn-secondary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .btn-secondary span,
+        .btn-secondary {
+            position: relative;
+            z-index: 3;
+        }
+
+        .btn-secondary:hover {
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 169, 97, 0.3);
+        }
+
+        body.night-mode .btn-secondary {
+            box-shadow: 0 0 15px rgba(255, 184, 0, 0.2);
+        }
+
+        body.night-mode .btn-secondary:hover {
+            background: var(--gold-bright);
+            box-shadow: 0 8px 35px var(--gold);
+        }
+
+        .btn-secondary:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-secondary:hover::after {
+            left: 100%;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4.5rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header .script {
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out 0.2s;
+        }
+
+        .section-header.visible .script {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            color: var(--warm-white);
+            margin-bottom: 1rem;
+            letter-spacing: 4px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out 0.4s;
+        }
+
+        .section-header.visible h2 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            opacity: 0;
+            transform: scaleX(0);
+            transition: all 0.8s ease-out 0.6s;
+        }
+
+        .section-header.visible .divider {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        .divider-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            transition: background 1.2s ease;
+        }
+
+        .divider-diamond {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            transition: background 1.2s ease;
+        }
+
+        .section-header p {
+            color: var(--cream-soft);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 0.8s ease-out 0.8s, color 1.2s ease;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .section-header.visible p {
+            opacity: 0.8;
+        }
+
+        /* Vibe Section */
+        .vibe-gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .vibe-card {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .vibe-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .vibe-image {
+            position: relative;
+            aspect-ratio: 4/5;
+            margin-bottom: 1.8rem;
+            overflow: hidden;
+            border: 1px solid var(--subtle-line);
+            transition: all 0.5s;
+        }
+
+        .vibe-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(10, 8, 7, 0.4) 100%);
+            pointer-events: none;
+        }
+
+        .vibe-image:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        body.night-mode .vibe-image:hover {
+            box-shadow: 0 10px 30px rgba(255, 184, 0, 0.3);
+        }
+
+        .vibe-image .img-placeholder {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .vibe-card:nth-child(1) { transition-delay: 0.1s; }
+        .vibe-card:nth-child(2) { transition-delay: 0.2s; }
+        .vibe-card:nth-child(3) { transition-delay: 0.3s; }
+
+        .vibe-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--warm-white);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 3px;
+            font-weight: 500;
+            transition: color 1.2s ease;
+        }
+
+        .vibe-card p {
+            color: var(--cream-soft);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            transition: color 1.2s ease;
+        }
+
+        .vibe-time {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid var(--gold);
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.5s ease;
+        }
+
+        /* Cocktails Showcase */
+        .cocktails-showcase {
+            background: var(--black-soft);
+            transition: background 1.2s ease;
+        }
+
+        .cocktails-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .cocktail-image-card {
+            aspect-ratio: 1;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--subtle-line);
+            transition: all 0.4s;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .cocktail-image-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .cocktail-image-card:hover {
+            transform: scale(1.03);
+            border-color: var(--gold);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        body.night-mode .cocktail-image-card:hover {
+            box-shadow: 0 8px 30px rgba(255, 184, 0, 0.4);
+        }
+
+        .cocktail-image-card .img-placeholder {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .cocktail-image-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 8, 7, 0.95) 0%, transparent 50%);
+        }
+
+        .cocktail-name {
+            position: absolute;
+            bottom: 1.2rem;
+            left: 1.2rem;
+            right: 1.2rem;
+            font-family: 'Cinzel', serif;
+            color: var(--warm-white);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            z-index: 2;
+            font-weight: 500;
+            transition: color 1.2s ease;
+        }
+
+        /* Menu Section */
+        .menu {
+            background: var(--black);
+            transition: background 1.2s ease;
+        }
+
+        .menu-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-control-btn {
+            position: relative;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 0.6rem 1.6rem;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            overflow: hidden;
+        }
+
+        .menu-control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .menu-control-btn:hover::before {
+            left: 0;
+        }
+
+        .menu-control-btn:hover {
+            color: var(--black);
+            transform: translateY(-2px);
+        }
+
+        body.night-mode .menu-control-btn:hover {
+            box-shadow: 0 4px 15px var(--gold);
+        }
+
+        .menu-category {
+            max-width: 1000px;
+            margin: 0 auto 1rem;
+            border: 1px solid var(--subtle-line);
+            background: var(--black-card);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-category:hover {
+            border-color: var(--gold);
+        }
+
+        body.night-mode .menu-category:hover {
+            box-shadow: 0 0 20px rgba(255, 184, 0, 0.2);
+        }
+
+        .menu-category-header {
+            padding: 1.6rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(201, 169, 97, 0.08) 0%, transparent 100%);
+            position: relative;
+            user-select: none;
+            transition: all 0.3s;
+        }
+
+        .menu-category-header:hover {
+            background: linear-gradient(90deg, rgba(201, 169, 97, 0.15) 0%, transparent 100%);
+        }
+
+        body.night-mode .menu-category-header {
+            background: linear-gradient(90deg, rgba(255, 184, 0, 0.1) 0%, transparent 100%);
+        }
+
+        .menu-category-title-wrapper {
+            flex: 1;
+        }
+
+        .menu-category-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--warm-white);
+            margin-bottom: 0.3rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: color 1.2s ease;
+        }
+
+        .menu-category-subtitle {
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 1.1rem;
+            transition: color 1.2s ease;
+        }
+
+        .menu-category-count {
+            color: var(--smoke);
+            font-size: 0.8rem;
+            margin-right: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .menu-category-toggle {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .menu-category-toggle::before,
+        .menu-category-toggle::after {
+            content: '';
+            position: absolute;
+            background: var(--gold);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-category-toggle::before {
+            width: 12px;
+            height: 1.5px;
+        }
+
+        .menu-category-toggle::after {
+            width: 1.5px;
+            height: 12px;
+        }
+
+        .menu-category.active .menu-category-toggle {
+            background: var(--gold);
+            transform: rotate(180deg);
+        }
+
+        .menu-category.active .menu-category-toggle::before,
+        .menu-category.active .menu-category-toggle::after {
+            background: var(--black);
+        }
+
+        .menu-category.active .menu-category-toggle::after {
+            transform: scaleY(0);
+        }
+
+        .menu-category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-category.active .menu-category-content {
+            max-height: 8000px;
+        }
+
+        .menu-category-note {
+            padding: 1rem 2rem;
+            color: var(--gold);
+            font-size: 0.82rem;
+            font-style: italic;
+            background: rgba(201, 169, 97, 0.05);
+            border-bottom: 1px solid var(--subtle-line);
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            transition: all 0.5s ease;
+        }
+
+        .menu-grid {
+            padding: 1rem 0;
+        }
+
+        .menu-item {
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s;
+            border-bottom: 1px solid var(--subtle-line);
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .menu-category.active .menu-item {
+            animation: menuItemSlide 0.4s ease-out forwards;
+        }
+
+        @keyframes menuItemSlide {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background: rgba(201, 169, 97, 0.05);
+            padding-left: 2.5rem;
+        }
+
+        body.night-mode .menu-item:hover {
+            background: rgba(255, 184, 0, 0.08);
+        }
+
+        .menu-item-info {
+            flex: 1;
+        }
+
+        .menu-item-name {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--cream);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            font-weight: 500;
+            transition: color 1.2s ease;
+        }
+
+        .menu-item-desc {
+            color: var(--smoke);
+            font-size: 0.78rem;
+            opacity: 0.8;
+            line-height: 1.5;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .menu-item-price {
+            color: var(--gold);
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            transition: color 1.2s ease;
+        }
+
+        /* Events Section */
+        .events {
+            background: var(--black-soft);
+            transition: background 1.2s ease;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            background: var(--black-card);
+            border: 1px solid var(--subtle-line);
+            padding: 2.8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .event-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s;
+        }
+
+        .event-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .event-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        body.night-mode .event-card:hover {
+            box-shadow: 0 15px 40px rgba(255, 184, 0, 0.3);
+        }
+
+        .event-day {
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-title {
+            font-family: 'Cinzel', serif;
+            color: var(--warm-white);
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            font-weight: 500;
+        }
+
+        .event-desc {
+            color: var(--cream-soft);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .event-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--gold);
+        }
+
+        /* Hookah Section */
+        .hookah {
+            background: var(--black);
+            transition: background 1.2s ease;
+        }
+
+        .hookah-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .hookah-card {
+            background: var(--black-card);
+            border: 1px solid var(--subtle-line);
+            padding: 2.2rem;
+            text-align: center;
+            transition: all 0.4s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hookah-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hookah-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        body.night-mode .hookah-card:hover {
+            box-shadow: 0 10px 30px rgba(255, 184, 0, 0.3);
+        }
+
+        .hookah-card h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--warm-white);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .hookah-card .price {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2rem;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+
+        .hookah-card p {
+            color: var(--cream-soft);
+            font-size: 0.85rem;
+            opacity: 0.7;
+            font-weight: 300;
+        }
+
+        /* Interior Section */
+        .interior-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 260px 260px;
+            gap: 1rem;
+        }
+
+        .interior-img {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--subtle-line);
+            transition: all 0.4s;
+            opacity: 0;
+            transform: scale(0.97);
+        }
+
+        .interior-img.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .interior-img:hover {
+            border-color: var(--gold);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        body.night-mode .interior-img:hover {
+            box-shadow: 0 10px 30px rgba(255, 184, 0, 0.3);
+        }
+
+        .interior-img:nth-child(1) {
+            grid-row: span 2;
+        }
+
+        .interior-img .img-placeholder {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .interior-img-label {
+            position: absolute;
+            bottom: 1.2rem;
+            left: 1.2rem;
+            font-family: 'Cinzel', serif;
+            color: var(--warm-white);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            background: rgba(10, 8, 7, 0.85);
+            padding: 0.5rem 1rem;
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+        }
+
+        /* Reviews */
+        .reviews {
+            background: var(--black-soft);
+            transition: background 1.2s ease;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: var(--black-card);
+            border: 1px solid var(--subtle-line);
+            padding: 2.8rem 2.2rem;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .review-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .review-card::before {
+            content: '"';
+            position: absolute;
+            top: -5px;
+            left: 25px;
+            font-size: 5rem;
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            line-height: 1;
+            opacity: 0.6;
+        }
+
+        .review-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .review-stars {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            color: var(--cream-soft);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+
+        .review-author {
+            color: var(--gold);
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Reservation */
+        .reservation {
+            background: var(--black);
+            transition: background 1.2s ease;
+        }
+
+        .reservation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--black-card);
+            border: 1px solid var(--gold);
+            padding: 3rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reservation-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        body.night-mode .reservation-container {
+            box-shadow: 0 0 30px rgba(255, 184, 0, 0.15);
+        }
+
+        .reservation-container::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--subtle-line);
+            pointer-events: none;
+        }
+
+        .reservation-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--black);
+            border: 1px solid var(--subtle-line);
+            padding: 0.9rem 1rem;
+            color: var(--cream);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            font-weight: 300;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(201, 169, 97, 0.05);
+        }
+
+        body.night-mode .form-group input:focus,
+        body.night-mode .form-group select:focus,
+        body.night-mode .form-group textarea:focus {
+            box-shadow: 0 0 15px rgba(255, 184, 0, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-submit {
+            grid-column: span 2;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Visit */
+        .visit {
+            background: var(--black-soft);
+            transition: background 1.2s ease;
+        }
+
+        .visit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .visit-card {
+            background: var(--black-card);
+            border: 1px solid var(--gold);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.5s;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .visit-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .visit-card:hover {
+            transform: translateY(-3px);
+        }
+
+        body.night-mode .visit-card {
+            box-shadow: 0 0 20px rgba(255, 184, 0, 0.1);
+        }
+
+        .visit-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 3px;
+            font-weight: 500;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            color: var(--cream-soft);
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateX(8px);
+            color: var(--gold);
+        }
+
+        .contact-icon {
+            width: 38px;
+            height: 38px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .hours-list {
+            list-style: none;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--subtle-line);
+            color: var(--cream-soft);
+            transition: all 0.3s;
+            font-weight: 300;
+        }
+
+        .hours-list li:hover {
+            padding-left: 10px;
+            color: var(--gold);
+        }
+
+        .hours-list .day {
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            border-top: 1px solid var(--subtle-line);
+            padding: 3.5rem 5% 2rem;
+            text-align: center;
+            transition: all 1.2s ease;
+        }
+
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            color: var(--warm-white);
+            font-size: 2rem;
+            letter-spacing: 5px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: color 1.2s ease, text-shadow 0.5s ease;
+        }
+
+        body.night-mode .footer-logo {
+            text-shadow: 0 0 15px rgba(255, 184, 0, 0.4);
+        }
+
+        .footer-tagline {
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-sub {
+            color: var(--cream-soft);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .footer-bottom {
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--subtle-line);
+            color: var(--cream-soft);
+            opacity: 0.5;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* Scroll to top */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            font-size: 1.1rem;
+        }
+
+        body.night-mode .scroll-top {
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: var(--gold-bright);
+            transform: translateY(-3px);
+        }
+
+        body.night-mode .scroll-top:hover {
+            box-shadow: 0 8px 25px var(--gold);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .reserve-btn { display: none; }
+            .burger { display: block; }
+
+            .vibe-gallery { grid-template-columns: 1fr; }
+            .cocktails-grid { grid-template-columns: repeat(2, 1fr); }
+            .interior-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .interior-img:nth-child(1) { grid-row: span 1; }
+            .visit-grid { grid-template-columns: 1fr; }
+
+            section { padding: 4rem 5%; }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+
+            .hero h1 { font-size: 2.8rem; letter-spacing: 4px; }
+            .hero-day-night { gap: 1rem; }
+
+            .menu-category-header { padding: 1.3rem 1.5rem; }
+            .menu-item { padding: 1rem 1.5rem; }
+            .menu-item:hover { padding-left: 1.8rem; }
+            .menu-category-title { font-size: 1.2rem; }
+
+            .reservation-container { padding: 2rem 1.5rem; }
+            .reservation-form { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .form-submit { grid-column: span 1; }
+
+            .events-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .mobile-menu { max-width: 100%; }
+            .logo-text { font-size: 1.1rem; letter-spacing: 2px; }
+            .logo-subtitle { font-size: 0.7rem; }
+            .cocktails-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="pattern-bg"></div>
+    <div class="music-particles" id="musicParticles"></div>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-tagline">Est. Brooklyn</div>
+            <div class="mobile-menu-subtitle">Navigation</div>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#home" class="mobile-link"><span class="number">01</span>Home</a></li>
+            <li><a href="#vibe" class="mobile-link"><span class="number">02</span>The Vibe</a></li>
+            <li><a href="#cocktails" class="mobile-link"><span class="number">03</span>Cocktails</a></li>
+            <li><a href="#interior" class="mobile-link"><span class="number">04</span>Interior</a></li>
+            <li><a href="#menu" class="mobile-link"><span class="number">05</span>Menu</a></li>
+            <li><a href="#events" class="mobile-link"><span class="number">06</span>Events</a></li>
+            <li><a href="#hookah" class="mobile-link"><span class="number">07</span>Hookah</a></li>
+            <li><a href="#reservation" class="mobile-link"><span class="number">08</span>Reserve</a></li>
+            <li><a href="#visit" class="mobile-link"><span class="number">09</span>Visit</a></li>
+        </ul>
+        <div class="mobile-menu-footer">
+            <a href="#reservation" class="mobile-menu-cta">Reserve a Table</a>
+            <a href="tel:+13475877331" class="mobile-menu-cta" style="background: transparent; color: var(--gold); border: 1px solid var(--gold);">Call Us</a>
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.5">
+                    <path d="M8 2L12 12L16 2M5 22h14M12 12v10"/>
+                </svg>
+            </div>
+            <div>
+                <div class="logo-text">ON THE ROCKS</div>
+                <span class="logo-subtitle">Cocktail Lounge & Coffee Bar</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#vibe">Vibe</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#reservation">Reserve</a></li>
+            <li><a href="#visit">Visit</a></li>
+        </ul>
+        <a href="#reservation" class="reserve-btn"><span>Reserve</span></a>
+        <button class="burger" id="burger" aria-label="Toggle menu">
+            <div class="burger-lines">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </div>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg-image">
+            <div class="img-placeholder">
+                <div class="img-placeholder-icon">📸</div>
+                <div class="img-placeholder-text">Hero Background Image</div>
+                <div class="img-placeholder-sub">Wide interior shot — elegant lounge with warm lighting</div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-day-night">
+                <div class="hero-time-slot">
+                    <span class="hero-time-icon">☕</span>
+                    <div class="hero-time-label">Coffee Bar • Daytime</div>
+                </div>
+                <div class="hero-time-divider"></div>
+                <div class="hero-time-slot">
+                    <span class="hero-time-icon">🥃</span>
+                    <div class="hero-time-label">Cocktail Lounge • Nighttime</div>
+                </div>
+            </div>
+            <h1>ON THE ROCKS</h1>
+            <p class="hero-tagline">Open All Day, Every Day</p>
+            <p class="hero-subtitle">Brooklyn's refined coffee bar and cocktail lounge — where the morning espresso flows into the evening cocktail</p>
+            <div class="hero-rating">
+                <div class="stars">★★★★★</div>
+                <div class="rating-text"><strong>4.5</strong> · 112 Reviews · $10–20 per person</div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#reservation" class="btn-primary">Reserve a Table</a>
+                <a href="#vibe" class="btn-secondary">Discover More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Vibe Section -->
+    <section id="vibe">
+        <div class="section-header" data-animate>
+            <div class="script">Two Worlds, One Space</div>
+            <h2>The Vibe</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p>An elegant space that transforms with the day — from refined morning coffee to sophisticated evening cocktails</p>
+        </div>
+        <div class="vibe-gallery">
+            <div class="vibe-card" data-animate>
+                <div class="vibe-image">
+                    <div class="img-placeholder">
+                        <div class="img-placeholder-icon">☕</div>
+                        <div class="img-placeholder-text">Coffee Bar Interior</div>
+                        <div class="img-placeholder-sub">Cozy seating • Lattes & pastries • Natural light • Laptops welcome</div>
+                    </div>
+                </div>
+                <h3>Coffee Bar</h3>
+                <p>Begin your day with handcrafted espresso, fresh pastries, and smooth jazz. A refined space to work, read, or gather with friends in comfort and style.</p>
+                <span class="vibe-time">7 AM — 4 PM</span>
+            </div>
+            <div class="vibe-card" data-animate>
+                <div class="vibe-image">
+                    <div class="img-placeholder">
+                        <div class="img-placeholder-icon">🍸</div>
+                        <div class="img-placeholder-text">Backyard Patio</div>
+                        <div class="img-placeholder-sub">Outdoor seating • Sunset views • Signature cocktails</div>
+                    </div>
+                </div>
+                <h3>Golden Hour</h3>
+                <p>As the sun sets, our beautiful backyard comes alive. Signature cocktails meet small bites as the music shifts and the energy gracefully elevates.</p>
+                <span class="vibe-time">4 PM — 9 PM</span>
+            </div>
+            <div class="vibe-card" data-animate>
+                <div class="vibe-image">
+                    <div class="img-placeholder">
+                        <div class="img-placeholder-icon">🥃</div>
+                        <div class="img-placeholder-text">Cocktail Lounge Interior</div>
+                        <div class="img-placeholder-sub">Premium bar • DJ booth • Lounge seating • Hookah area</div>
+                    </div>
+                </div>
+                <h3>Cocktail Lounge</h3>
+                <p>Premium spirits, expertly crafted cocktails, hookah, and live DJs. An upscale late-night destination with a sophisticated atmosphere.</p>
+                <span class="vibe-time">9 PM — Late</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cocktails Showcase -->
+    <section class="cocktails-showcase" id="cocktails">
+        <div class="section-header" data-animate>
+            <div class="script">Crafted With Care</div>
+            <h2>Signature Cocktails</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p>An artful selection of house specialties and timeless classics</p>
+        </div>
+        <div class="cocktails-grid">
+            <div class="cocktail-image-card" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🥂</div>
+                </div>
+                <div class="cocktail-name">Mimosa</div>
+            </div>
+            <div class="cocktail-image-card" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🍹</div>
+                </div>
+                <div class="cocktail-name">Bloody Mary</div>
+            </div>
+            <div class="cocktail-image-card" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🍸</div>
+                </div>
+                <div class="cocktail-name">Espresso Martini</div>
+            </div>
+            <div class="cocktail-image-card" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🥃</div>
+                </div>
+                <div class="cocktail-name">Old Fashioned</div>
+            </div>
+            <div class="cocktail-image-card" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🍹</div>
+                </div>
+                <div class="cocktail-name">Passionfruit Mojito</div>
+            </div>
+            <div class="cocktail-image-card" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🍸</div>
+                </div>
+                <div class="cocktail-name">Negroni</div>
+            </div>
+            <div class="cocktail-image-card" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🌴</div>
+                </div>
+                <div class="cocktail-name">Margarita</div>
+            </div>
+            <div class="cocktail-image-card" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">💎</div>
+                </div>
+                <div class="cocktail-name">Aperol Spritz</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interior Showcase -->
+    <section id="interior" style="background: var(--black);">
+        <div class="section-header" data-animate>
+            <div class="script">The Space</div>
+            <h2>Step Inside</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p>From morning coffee corners to late-night cocktails</p>
+        </div>
+        <div class="interior-grid">
+            <div class="interior-img" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🖼️</div>
+                    <div class="img-placeholder-text">Main Lounge</div>
+                    <div class="img-placeholder-sub">Wide shot of the main bar and seating area</div>
+                </div>
+                <div class="interior-img-label">Main Lounge</div>
+            </div>
+            <div class="interior-img" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🎵</div>
+                    <div class="img-placeholder-text">DJ Booth / Stage</div>
+                </div>
+                <div class="interior-img-label">DJ Booth</div>
+            </div>
+            <div class="interior-img" data-animate>
+                <div class="img-placeholder">
+                    <div class="img-placeholder-icon">🌿</div>
+                    <div class="img-placeholder-text">Backyard Patio</div>
+                </div>
+                <div class="interior-img-label">Backyard</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="section-header" data-animate>
+            <div class="script">Crafted Selection</div>
+            <h2>Our Menu</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p>Tap any section to explore • From morning brews to evening spirits</p>
+        </div>
+
+        <div class="menu-controls" data-animate>
+            <button class="menu-control-btn" id="expandAll">Expand All</button>
+            <button class="menu-control-btn" id="collapseAll">Collapse All</button>
+        </div>
+
+        <div id="menuContainer"></div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="events">
+        <div class="section-header" data-animate>
+            <div class="script">Weekly Programming</div>
+            <h2>Events & Nights</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p>Curated experiences throughout the week</p>
+        </div>
+        <div class="events-grid">
+            <div class="event-card" data-animate>
+                <span class="event-icon">🎤</span>
+                <div class="event-day">Friday Evenings</div>
+                <h3 class="event-title">Karaoke Night</h3>
+                <p class="event-desc">Take the stage and sing your heart out. Cocktail specials and an electric atmosphere throughout the night.</p>
+                <div class="event-day" style="margin-top: 1rem;">9 PM — 2 AM</div>
+            </div>
+            <div class="event-card" data-animate>
+                <span class="event-icon">🎧</span>
+                <div class="event-day">Saturday Evenings</div>
+                <h3 class="event-title">DJ Dance Night</h3>
+                <p class="event-desc">Resident DJs spinning the best beats. Dance floor, premium cocktails, and an electric atmosphere all night.</p>
+                <div class="event-day" style="margin-top: 1rem;">10 PM — 4 AM</div>
+            </div>
+            <div class="event-card" data-animate>
+                <span class="event-icon">🎷</span>
+                <div class="event-day">Sunday Mornings</div>
+                <h3 class="event-title">Live Jazz Brunch</h3>
+                <p class="event-desc">Sunday morning jazz with bottomless mimosas and our signature brunch cocktails. Pure sophistication.</p>
+                <div class="event-day" style="margin-top: 1rem;">11 AM — 3 PM</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hookah Section -->
+    <section class="hookah" id="hookah">
+        <div class="section-header" data-animate>
+            <div class="script">Premium Selection</div>
+            <h2>Hookah Lounge</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p>Premium hookah with a curated selection of tobacco flavors</p>
+        </div>
+        <div class="hookah-grid">
+            <div class="hookah-card" data-animate>
+                <h4>Hookah with Tobacco</h4>
+                <div class="price">$40</div>
+                <p>Choose from our wide selection of premium tobacco flavors</p>
+            </div>
+            <div class="hookah-card" data-animate>
+                <h4>Base Upgrade</h4>
+                <div class="price">$100</div>
+                <p>Premium base for a smoother, richer smoke</p>
+            </div>
+            <div class="hookah-card" data-animate>
+                <h4>Full Bowl</h4>
+                <div class="price">$200</div>
+                <p>The ultimate hookah experience with extra-large bowl</p>
+            </div>
+            <div class="hookah-card" data-animate>
+                <h4>Base Damage - Milk</h4>
+                <div class="price">$10</div>
+                <p>Milk base option for creamier smoke</p>
+            </div>
+            <div class="hookah-card" data-animate>
+                <h4>Base Damage - Wine</h4>
+                <div class="price">$15</div>
+                <p>Wine-infused base for unique flavor</p>
+            </div>
+            <div class="hookah-card" data-animate>
+                <h4>Base Damage - Fresh Fruit</h4>
+                <div class="price">$10</div>
+                <p>Fresh fruit head for natural fruity smoke</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="section-header" data-animate>
+            <div class="script">What People Say</div>
+            <h2>Reviews</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card" data-animate>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"I had such a great experience at this bar. The atmosphere was cozy and lively at the same time, with great music and a really welcoming vibe. The drinks were made perfectly, especially the cocktails, and the staff was friendly, attentive..."</p>
+                <div class="review-author">— Sopiko Kublashvili</div>
+            </div>
+            <div class="review-card" data-animate>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Amazing atmosphere, beautiful backyard, great music, and really good cocktails. The staff is friendly and makes you feel welcome right away. One of the best spots in Brooklyn for drinks with friends or a chill night out. Definitely coming back!"</p>
+                <div class="review-author">— Гванца ГВА</div>
+            </div>
+            <div class="review-card" data-animate>
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Great atmosphere, friendly staff, and really delicious cocktails. The vibe is cozy and enjoyable, definitely a place you must visit! The hookah was smooth and the backyard is gorgeous."</p>
+                <div class="review-author">— Lenka Adeishvili</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="reservation" id="reservation">
+        <div class="section-header" data-animate>
+            <div class="script">Book Your Visit</div>
+            <h2>Reservations</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+            <p>Reserve for morning coffee, evening cocktails, dance nights, or private events</p>
+        </div>
+        <div class="reservation-container" data-animate>
+            <form class="reservation-form" id="reservationForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Guests</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Select...</option>
+                        <option value="1-2">1-2 Guests</option>
+                        <option value="3-4">3-4 Guests</option>
+                        <option value="5-6">5-6 Guests</option>
+                        <option value="7-10">7-10 Guests</option>
+                        <option value="10+">10+ (Private Event)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time</label>
+                    <select id="time" name="time" required>
+                        <option value="">Select...</option>
+                        <option value="morning">Morning (7 AM - 12 PM)</option>
+                        <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                        <option value="evening">Evening (5 PM - 9 PM)</option>
+                        <option value="night">Night (9 PM - Late)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="occasion">Occasion</label>
+                    <select id="occasion" name="occasion">
+                        <option value="">Optional</option>
+                        <option value="casual">Casual</option>
+                        <option value="work">Work/Study</option>
+                        <option value="date">Date Night</option>
+                        <option value="birthday">Birthday</option>
+                        <option value="business">Business</option>
+                        <option value="private">Private Event</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label for="requests">Special Requests</label>
+                    <textarea id="requests" name="requests" placeholder="Birthday cake? Specific seating? DJ requests?"></textarea>
+                </div>
+                <div class="form-submit">
+                    <button type="submit" class="btn-primary">Request Reservation</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Visit Section -->
+    <section class="visit" id="visit">
+        <div class="section-header" data-animate>
+            <div class="script">Find Us</div>
+            <h2>Hours & Location</h2>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+        </div>
+        <div class="visit-grid">
+            <div class="visit-card" data-animate>
+                <h3>Contact</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>1861 Cropsey Ave<br>Brooklyn, NY 11214</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>(347) 587-7331</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✦</div>
+                    <div>Dine-in Available<br>Private Events Welcome</div>
+                </div>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://maps.google.com/?q=1861+Cropsey+Ave+Brooklyn+NY+11214" target="_blank" class="btn-primary" style="font-size: 0.78rem; padding: 0.85rem 1.5rem;">Directions</a>
+                    <a href="tel:+13475877331" class="btn-secondary" style="font-size: 0.78rem; padding: 0.85rem 1.5rem;">Call Now</a>
+                </div>
+            </div>
+            <div class="visit-card" data-animate>
+                <h3>Hours</h3>
+                <ul class="hours-list">
+                    <li><span class="day">Monday</span><span>7:00 AM – 2:00 AM</span></li>
+                    <li><span class="day">Tuesday</span><span>7:00 AM – 2:00 AM</span></li>
+                    <li><span class="day">Wednesday</span><span>7:00 AM – 2:00 AM</span></li>
+                    <li><span class="day">Thursday</span><span>7:00 AM – 2:00 AM</span></li>
+                    <li><span class="day">Friday</span><span>7:00 AM – 4:00 AM</span></li>
+                    <li><span class="day">Saturday</span><span>7:00 AM – 4:00 AM</span></li>
+                    <li><span class="day">Sunday</span><span>11:00 AM – 2:00 AM</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">ON THE ROCKS</div>
+        <div class="footer-tagline">Est. Brooklyn</div>
+        <div class="footer-sub">Cocktail Lounge & Coffee Bar — Open All Day, Every Day</div>
+        <div class="footer-bottom">
+            © 2024 On The Rocks Cocktail Lounge & Private Event Space · All Rights Reserved
+        </div>
+    </footer>
+
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+    <script>
+        // Menu data (abbreviated for space - use full menu from before)
+        const menuData = [
+            {
+                title: "Coffee & Tea",
+                subtitle: "Morning Selections",
+                items: [
+                    { name: "Espresso", desc: "Rich, bold, perfectly pulled shot", price: "$3" },
+                    { name: "Americano", desc: "Espresso with hot water, smooth finish", price: "$3" },
+                    { name: "Cappuccino", desc: "Equal parts espresso, steamed milk, and foam", price: "$5" },
+                    { name: "Latte", desc: "Espresso with velvety steamed milk", price: "$5" },
+                    { name: "Iced Coffee", desc: "Cold-brewed and refreshing", price: "$5" },
+                    { name: "Iced Latte", desc: "Espresso over ice with cold milk", price: "$5" },
+                    { name: "Iced Cappuccino", desc: "Iced espresso with cold foam", price: "$5" },
+                    { name: "Caramel Latte", desc: "Latte with buttery caramel syrup", price: "$5" },
+                    { name: "Caramel Cappuccino", desc: "Cappuccino with caramel sweetness", price: "$5" },
+                    { name: "Chamomile Tea", desc: "Calming herbal infusion", price: "$12" },
+                    { name: "Minty Tea", desc: "Refreshing and aromatic", price: "$12" },
+                    { name: "Green Tea", desc: "Light and antioxidant-rich", price: "$12" },
+                    { name: "Black Tea", desc: "Bold and classic", price: "$12" },
+                    { name: "Fruit Tea", desc: "Sweet and fragrant blend", price: "$12" }
+                ]
+            },
+            {
+                title: "Desserts & Fruit",
+                subtitle: "Sweet Endings",
+                items: [
+                    { name: "Hazelnut Passion", desc: "Decadent hazelnut layered cake", price: "$12" },
+                    { name: "Old Fashioned Chocolate Fudge", desc: "Rich, dense, timeless classic", price: "$12" },
+                    { name: "Tiramisu Round", desc: "Espresso-soaked Italian favorite", price: "$12" },
+                    { name: "Pistachio Cream Cake", desc: "Nutty, creamy, irresistible", price: "$12" },
+                    { name: "Frutti di Bosco Tart (8\")", desc: "Mixed berry tart, perfect for sharing", price: "$12" },
+                    { name: "Fruit Salad", desc: "Fresh seasonal fruits", price: "$16" }
+                ]
+            },
+            {
+                title: "Hookah",
+                subtitle: "Premium Selection",
+                note: "All hookah with premium tobacco flavors. Base upgrades available.",
+                items: [
+                    { name: "Hookah (Tobacco Flavors)", desc: "Wide selection of premium flavors", price: "$40" },
+                    { name: "Base Upgrade", desc: "Premium base for smoother smoke", price: "$100" },
+                    { name: "Full Bowl", desc: "Extra-large bowl, ultimate experience", price: "$200" },
+                    { name: "Base Damage - Milk", desc: "Creamy milk-infused base", price: "$10" },
+                    { name: "Base Damage - Wine", desc: "Wine-infused premium base", price: "$15" },
+                    { name: "Base Damage - Fresh Fruit", desc: "Natural fresh fruit head", price: "$10" }
+                ]
+            },
+            {
+                title: "Wine",
+                subtitle: "By the Glass",
+                items: [
+                    { name: "Prosecco", desc: "Italian sparkling wine, crisp and bubbly", price: "$10" },
+                    { name: "Pinot Grigio", desc: "Light, refreshing Italian white", price: "$10" },
+                    { name: "Sauvignon Blanc", desc: "Crisp with citrus notes", price: "$10" },
+                    { name: "Chardonnay", desc: "Buttery and oaky", price: "$10" },
+                    { name: "Pinot Noir", desc: "Smooth, light-bodied red", price: "$12" },
+                    { name: "Merlot", desc: "Soft, fruity red wine", price: "$12" },
+                    { name: "Cabernet Sauvignon", desc: "Bold, full-bodied classic", price: "$12" }
+                ]
+            },
+            {
+                title: "Beer",
+                subtitle: "Curated Bottles",
+                items: [
+                    { name: "Corona", desc: "Light Mexican lager", price: "$6" },
+                    { name: "Heineken", desc: "Classic Dutch pilsner", price: "$6" },
+                    { name: "Peroni", desc: "Italian premium lager", price: "$6" },
+                    { name: "Stella Artois", desc: "Belgian pilsner", price: "$6" },
+                    { name: "Modelo Especial", desc: "Mexican pilsner-style lager", price: "$6" },
+                    { name: "Amstel", desc: "Dutch light lager", price: "$6" },
+                    { name: "Blue Moon", desc: "Belgian-style wheat ale", price: "$6" },
+                    { name: "Modelo Negra", desc: "Dark Mexican lager", price: "$6" },
+                    { name: "Bud Light", desc: "American light lager", price: "$6" },
+                    { name: "Coors Light", desc: "Crisp American light", price: "$6" },
+                    { name: "Michelob Ultra", desc: "Light low-carb lager", price: "$6" },
+                    { name: "Heineken 0.0", desc: "Non-alcoholic option", price: "$6" }
+                ]
+            },
+            {
+                title: "Finger Food",
+                subtitle: "Perfect Pairings",
+                items: [
+                    { name: "Cheese Board", desc: "Curated selection of artisanal cheeses", price: "$30" },
+                    { name: "Chicken Board", desc: "Variety of chicken bites and dips", price: "$30" },
+                    { name: "Chips Platter", desc: "Crispy chips with signature dips", price: "$10" },
+                    { name: "Beer Platter", desc: "Loaded platter perfect for sharing", price: "$30" }
+                ]
+            },
+            {
+                title: "Mocktails",
+                subtitle: "All $15 — Virgin Delights",
+                note: "Cucumber Cooler • Virgin Passionfruit Mojito • Mojito • Tropical Sunset • Lavender Lemonade • Pomegranate Breeze • Pink Lemonade Spritz • Berry Fizz",
+                items: [
+                    { name: "Cucumber Cooler", desc: "Refreshing cucumber and mint blend", price: "$15" },
+                    { name: "Virgin Passionfruit Mojito", desc: "Tropical passionfruit with lime", price: "$15" },
+                    { name: "Mojito", desc: "Classic lime and mint refresher", price: "$15" },
+                    { name: "Tropical Sunset", desc: "Layered tropical fruit medley", price: "$15" },
+                    { name: "Lavender Lemonade", desc: "Floral and citrusy perfection", price: "$15" },
+                    { name: "Pomegranate Breeze", desc: "Sweet pomegranate with sparkle", price: "$15" },
+                    { name: "Pink Lemonade Spritz", desc: "Bubbly pink citrus delight", price: "$15" },
+                    { name: "Berry Fizz", desc: "Mixed berries with fizz", price: "$15" }
+                ]
+            },
+            {
+                title: "Premium Spirits",
+                subtitle: "Top Shelf",
+                items: [
+                    { name: "The Boss Hog", desc: "Rare straight rye whiskey", price: "$120" },
+                    { name: "Blue Label", desc: "Johnnie Walker Blue", price: "$40" },
+                    { name: "Clase Azul", desc: "Ultra-premium tequila", price: "$40" },
+                    { name: "Don Julio 1942", desc: "Aged añejo tequila", price: "$40" },
+                    { name: "Macallan 12", desc: "Single malt Scotch whisky", price: "$16" },
+                    { name: "Macallan 15", desc: "Aged single malt", price: "$35" }
+                ]
+            },
+            {
+                title: "Margaritas",
+                subtitle: "All $15 — Classic & Creative",
+                note: "Classic • Spicy • Passionfruit • Coconut • Watermelon • Pineapple • Mango • Strawberry • Frozen Blue • Espresso",
+                items: [
+                    { name: "Classic Margarita", desc: "Tequila, lime, triple sec on the rocks", price: "$15" },
+                    { name: "Spicy Margarita", desc: "With jalapeño kick", price: "$15" },
+                    { name: "Passionfruit Margarita", desc: "Tropical passionfruit twist", price: "$15" },
+                    { name: "Coconut Margarita", desc: "Creamy coconut infusion", price: "$15" },
+                    { name: "Watermelon Margarita", desc: "Summer in a glass", price: "$15" },
+                    { name: "Pineapple Margarita", desc: "Tropical paradise", price: "$15" },
+                    { name: "Mango Margarita", desc: "Sweet mango perfection", price: "$15" },
+                    { name: "Strawberry Margarita", desc: "Fresh strawberry blend", price: "$15" },
+                    { name: "Frozen Blue Margarita", desc: "Icy blue curaçao blend", price: "$15" },
+                    { name: "Espresso Margarita", desc: "Coffee meets tequila", price: "$15" }
+                ]
+            },
+            {
+                title: "Frozen Cocktails",
+                subtitle: "All $17 — Blended Bliss",
+                note: "Miami Vice • Frozen Strawberry Margarita • Frozen Espresso Martini • Coronita/Beerita • Frozen Passion Margarita • Frozen Watermelon Margarita • Frozen Lemon Drop • Bellini",
+                items: [
+                    { name: "Miami Vice", desc: "Half strawberry daiquiri, half piña colada", price: "$17" },
+                    { name: "Frozen Strawberry Margarita", desc: "Classic margarita blended with strawberries", price: "$17" },
+                    { name: "Frozen Espresso Martini", desc: "Iced coffee cocktail perfection", price: "$17" },
+                    { name: "Coronita/Beerita", desc: "Frozen margarita with upside-down beer", price: "$17" },
+                    { name: "Frozen Passion Margarita", desc: "Passionfruit margarita blended", price: "$17" },
+                    { name: "Frozen Watermelon Margarita", desc: "Frozen summer favorite", price: "$17" },
+                    { name: "Frozen Lemon Drop", desc: "Icy lemon vodka delight", price: "$17" },
+                    { name: "Bellini", desc: "Peach and prosecco frozen", price: "$17" }
+                ]
+            },
+            {
+                title: "Martinis & Cocktails",
+                subtitle: "Most $15 — Crafted Classics",
+                items: [
+                    { name: "Espresso Martini", desc: "Vodka, espresso, coffee liqueur", price: "$15" },
+                    { name: "Pistachio Martini", desc: "Creamy nutty delight", price: "$15" },
+                    { name: "Chocolate Martini", desc: "Decadent chocolate indulgence", price: "$15" },
+                    { name: "White Velvet", desc: "Smooth and elegant", price: "$15" },
+                    { name: "Dirty Martini", desc: "With olive brine", price: "$15" },
+                    { name: "Pornstar Martini", desc: "Vodka, passionfruit, prosecco shot", price: "$15" },
+                    { name: "Lychee Martini", desc: "Sweet floral Asian favorite", price: "$15" },
+                    { name: "French Martini", desc: "Vodka, raspberry, pineapple", price: "$15" },
+                    { name: "Cucumber Martini", desc: "Fresh and crisp", price: "$15" },
+                    { name: "Lemon Drop", desc: "Sweet and tart vodka", price: "$15" },
+                    { name: "Strawberry Martini", desc: "Fresh berry infused", price: "$15" },
+                    { name: "Apple Martini", desc: "Crisp apple flavor", price: "$15" },
+                    { name: "Whiskey Sour", desc: "Bourbon, lemon, sugar", price: "$15" },
+                    { name: "New York Sour", desc: "Whiskey sour with red wine float", price: "$16" },
+                    { name: "Amaretto Sour", desc: "Almond liqueur, lemon, sweet", price: "$15" },
+                    { name: "White Russian", desc: "Vodka, coffee liqueur, cream", price: "$15" },
+                    { name: "Green Tea", desc: "Cocktail version, not the hot drink", price: "$15" },
+                    { name: "Moscow Mule", desc: "Vodka, ginger beer, lime", price: "$15" },
+                    { name: "Blue Lagoon", desc: "Vodka, blue curaçao, lemonade", price: "$15" },
+                    { name: "Aperol Spritz", desc: "Aperol, prosecco, soda", price: "$15" }
+                ]
+            },
+            {
+                title: "On The Rocks Signature",
+                subtitle: "All $15 — House Specialties",
+                note: "Screwdriver • Bloody Mary • Paloma • Mimosa • Tom Collins • Daiquiri • Gimlet • Mai Tai • Aviation • Sidecar • Brooklyn Smoke • Blue Hawaii • Mojito • Negroni • Old Fashioned • Manhattan • The Division Bell • Smoky Passion • Sex on the Beach • Long Island",
+                items: [
+                    { name: "Screwdriver", desc: "Vodka and fresh orange juice", price: "$15" },
+                    { name: "Bloody Mary", desc: "Vodka, tomato, spices, celery", price: "$15" },
+                    { name: "Paloma", desc: "Tequila, grapefruit, lime", price: "$15" },
+                    { name: "Mimosa", desc: "Champagne and fresh orange juice", price: "$15" },
+                    { name: "Tom Collins", desc: "Gin, lemon, soda, classic refresher", price: "$15" },
+                    { name: "Daiquiri", desc: "Rum, lime, simple syrup", price: "$15" },
+                    { name: "Gimlet", desc: "Gin and lime, sophisticated sip", price: "$15" },
+                    { name: "Mai Tai", desc: "Rum, curaçao, orgeat, lime", price: "$15" },
+                    { name: "Aviation", desc: "Gin, maraschino, crème de violette", price: "$15" },
+                    { name: "Sidecar", desc: "Cognac, orange liqueur, lemon", price: "$15" },
+                    { name: "Brooklyn Smoke", desc: "Our signature smoked cocktail", price: "$15" },
+                    { name: "Blue Hawaii", desc: "Rum, vodka, blue curaçao, pineapple", price: "$15" },
+                    { name: "Mojito", desc: "Rum, mint, lime, soda", price: "$15" },
+                    { name: "Negroni", desc: "Gin, Campari, sweet vermouth", price: "$15" },
+                    { name: "Old Fashioned", desc: "Bourbon, bitters, sugar, orange", price: "$15" },
+                    { name: "Manhattan", desc: "Whiskey, sweet vermouth, bitters", price: "$15" },
+                    { name: "The Division Bell", desc: "Mezcal, Aperol, maraschino, lime", price: "$15" },
+                    { name: "Smoky Passion", desc: "Mezcal and passionfruit fusion", price: "$15" },
+                    { name: "Sex on the Beach", desc: "Vodka, peach, orange, cranberry", price: "$15" },
+                    { name: "Long Island", desc: "Five spirits in one powerful drink", price: "$15" }
+                ]
+            }
+        ];
+
+        // Render menu
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            container.innerHTML = menuData.map((category, catIndex) => `
+                <div class="menu-category" data-category-index="${catIndex}">
+                    <div class="menu-category-header" onclick="toggleCategory(${catIndex})">
+                        <div class="menu-category-title-wrapper">
+                            <div class="menu-category-title">${category.title}</div>
+                            <div class="menu-category-subtitle">${category.subtitle}</div>
+                        </div>
+                        <span class="menu-category-count">${category.items.length} items</span>
+                        <div class="menu-category-toggle"></div>
+                    </div>
+                    <div class="menu-category-content">
+                        ${category.note ? `<div class="menu-category-note">${category.note}</div>` : ''}
+                        <div class="menu-grid">
+                            ${category.items.map((item, i) => `
+                                <div class="menu-item" style="animation-delay: ${i * 0.03}s">
+                                    <div class="menu-item-info">
+                                        <div class="menu-item-name">${item.name}</div>
+                                        <div class="menu-item-desc">${item.desc}</div>
+                                    </div>
+                                    <div class="menu-item-price">${item.price}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCategory(index) {
+            const category = document.querySelectorAll('.menu-category')[index];
+            category.classList.toggle('active');
+        }
+
+        document.getElementById('expandAll').addEventListener('click', () => {
+            document.querySelectorAll('.menu-category').forEach(cat => cat.classList.add('active'));
+        });
+
+        document.getElementById('collapseAll').addEventListener('click', () => {
+            document.querySelectorAll('.menu-category').forEach(cat => cat.classList.remove('active'));
+        });
+
+        renderMenu();
+
+        // Reservation form
+        document.getElementById('reservationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your reservation request! We will contact you shortly to confirm.');
+            e.target.reset();
+        });
+
+        // Burger menu
+        const burger = document.getElementById('burger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuBackdrop = document.getElementById('menuBackdrop');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const body = document.body;
+
+        function toggleMenu() {
+            burger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            menuBackdrop.classList.toggle('active');
+            body.classList.toggle('no-scroll');
+        }
+
+        function closeMenu() {
+            burger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            menuBackdrop.classList.remove('active');
+            body.classList.remove('no-scroll');
+        }
+
+        burger.addEventListener('click', toggleMenu);
+        menuBackdrop.addEventListener('click', closeMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) closeMenu();
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Navbar scroll + Night Mode Toggle
+        const navbar = document.getElementById('navbar');
+        const scrollProgress = document.getElementById('scrollProgress');
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress.style.width = (scrolled / total) * 100 + '%';
+            
+            if (scrolled > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+            
+            if (scrolled > 500) scrollTopBtn.classList.add('visible');
+            else scrollTopBtn.classList.remove('visible');
+
+            // Night mode activation - transitions after scrolling past hero
+            if (scrolled > window.innerHeight * 0.7) {
+                body.classList.add('night-mode');
+            } else {
+                body.classList.remove('night-mode');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        setTimeout(() => {
+            document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+        }, 100);
+
+        // Music note particles
+        const notes = ['♪', '♫', '♩', '♬'];
+        const particlesContainer = document.getElementById('musicParticles');
+        for (let i = 0; i < 12; i++) {
+            const note = document.createElement('div');
+            note.className = 'music-note';
+            note.textContent = notes[Math.floor(Math.random() * notes.length)];
+            note.style.left = Math.random() * 100 + '%';
+            note.style.animationDelay = Math.random() * 25 + 's';
+            note.style.animationDuration = (Math.random() * 10 + 20) + 's';
+            note.style.fontSize = (Math.random() * 0.8 + 1) + 'rem';
+            particlesContainer.appendChild(note);
+        }
+
+        // Parallax hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const hero = document.querySelector('.hero-content');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
+            }
+        });
+    </script>
+</body>
+</html>
