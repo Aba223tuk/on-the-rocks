@@ -1916,6 +1916,89 @@
             margin-top: 1rem;
         }
 
+        .reservation-call {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--black-card);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reservation-call.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reservation-call::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--subtle-line);
+            pointer-events: none;
+            border-radius: 10px;
+        }
+
+        .reservation-label {
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            z-index: 1;
+        }
+
+        .reservation-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.1rem 2.2rem;
+            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
+            color: var(--black);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 24px rgba(201, 169, 97, 0.25);
+            z-index: 1;
+        }
+
+        .reservation-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(201, 169, 97, 0.4);
+        }
+
+        .reservation-button-icon {
+            font-size: 1.3rem;
+        }
+
+        .reservation-note {
+            color: var(--cream-soft);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 360px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        body.night-mode .reservation-call {
+            box-shadow: 0 0 30px rgba(255, 184, 0, 0.15);
+        }
+
         /* Visit */
         .visit {
             background: var(--black-soft);
@@ -2533,11 +2616,12 @@
             <p>Reservations by phone. Walk-ins welcome for cocktails and hookah.</p>
         </div>
         <div class="reservation-call" data-animate>
-            <a href="tel:+13476677331" class="reservation-phone">
-                <span class="phone-icon">📞</span>
-                <span class="phone-number">(347) 667-7331</span>
+            <p class="reservation-label">Reserve by Phone</p>
+            <a href="tel:+13476677331" class="reservation-button">
+                <span class="reservation-button-icon">📞</span>
+                <span class="reservation-button-text">(347) 667-7331</span>
             </a>
-            <p class="reservation-note">For large groups, private events, and hookah reservations, call ahead. We hold tables for 15 minutes.</p>
+            <p class="reservation-note">Walk-ins welcome for cocktails and hookah. For large groups and private events, call ahead.</p>
         </div>
     </section>
 
