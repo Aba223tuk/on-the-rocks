@@ -675,6 +675,13 @@
             z-index: 0;
         }
 
+        .hero-bg-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.55;
+        }
+
         .hero-bg-image .img-placeholder {
             width: 100%;
             height: 100%;
@@ -1129,6 +1136,17 @@
 
         body.night-mode .vibe-image:hover {
             box-shadow: 0 10px 30px rgba(255, 184, 0, 0.3);
+        }
+
+        .vibe-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .vibe-image:hover img {
+            transform: scale(1.05);
         }
 
         .vibe-image .img-placeholder {
@@ -1688,6 +1706,17 @@
             grid-row: span 2;
         }
 
+        .interior-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .interior-img:hover img {
+            transform: scale(1.05);
+        }
+
         .interior-img .img-placeholder {
             width: 100%;
             height: 100%;
@@ -2203,27 +2232,23 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-bg-image">
-            <div class="img-placeholder">
-                <div class="img-placeholder-icon">📸</div>
-                <div class="img-placeholder-text">Hero Background Image</div>
-                <div class="img-placeholder-sub">Wide interior shot — elegant lounge with warm lighting</div>
-            </div>
+            <img src="site-images/entrance.jpg" alt="On The Rocks floral neon entrance" loading="eager">
         </div>
         <div class="hero-content">
             <div class="hero-day-night">
                 <div class="hero-time-slot">
-                    <span class="hero-time-icon">☕</span>
-                    <div class="hero-time-label">Coffee Bar • Daytime</div>
+                    <span class="hero-time-icon">🥃</span>
+                    <div class="hero-time-label">Cocktails • All Day</div>
                 </div>
                 <div class="hero-time-divider"></div>
                 <div class="hero-time-slot">
-                    <span class="hero-time-icon">🥃</span>
-                    <div class="hero-time-label">Cocktail Lounge • Nighttime</div>
+                    <span class="hero-time-icon">💨</span>
+                    <div class="hero-time-label">Hookah • Late Night</div>
                 </div>
             </div>
             <h1>ON THE ROCKS</h1>
             <p class="hero-tagline">Open All Day, Every Day</p>
-            <p class="hero-subtitle">Brooklyn's refined coffee bar and cocktail lounge — where the morning espresso flows into the evening cocktail</p>
+            <p class="hero-subtitle">Brooklyn's refined cocktail lounge and hookah bar — craft cocktails, premium spirits, and late-night hookah in an elegant, day-to-night destination</p>
             <div class="hero-rating">
                 <div class="stars">★★★★★</div>
                 <div class="rating-text"><strong>4.5</strong> · 112 Reviews · $10–20 per person</div>
@@ -2238,35 +2263,27 @@
     <!-- The Vibe Section -->
     <section id="vibe">
         <div class="section-header" data-animate>
-            <div class="script">Two Worlds, One Space</div>
+            <div class="script">Day to Night</div>
             <h2>The Vibe</h2>
             <div class="divider">
                 <div class="divider-line"></div>
                 <div class="divider-diamond"></div>
                 <div class="divider-line"></div>
             </div>
-            <p>An elegant space that transforms with the day — from refined morning coffee to sophisticated evening cocktails</p>
+            <p>An intimate lounge built around craft cocktails, hookah, and conversation — with a beautiful backyard for golden-hour drinks and late-night hangs</p>
         </div>
         <div class="vibe-gallery">
             <div class="vibe-card" data-animate>
                 <div class="vibe-image">
-                    <div class="img-placeholder">
-                        <div class="img-placeholder-icon">☕</div>
-                        <div class="img-placeholder-text">Coffee Bar Interior</div>
-                        <div class="img-placeholder-sub">Cozy seating • Lattes & pastries • Natural light • Laptops welcome</div>
-                    </div>
+                    <img src="site-images/fireplace-lounge.jpg" alt="Cozy coffee bar seating by the fireplace" loading="lazy">
                 </div>
-                <h3>Coffee Bar</h3>
-                <p>Begin your day with handcrafted espresso, fresh pastries, and smooth jazz. A refined space to work, read, or gather with friends in comfort and style.</p>
-                <span class="vibe-time">7 AM — 4 PM</span>
+                <h3>Cocktail Bar</h3>
+                <p>Our chandelier-lit bar is the heart of the house — from espresso martinis and margaritas to old fashioneds and negronis, every drink is built with care.</p>
+                <span class="vibe-time">Open All Day</span>
             </div>
             <div class="vibe-card" data-animate>
                 <div class="vibe-image">
-                    <div class="img-placeholder">
-                        <div class="img-placeholder-icon">🍸</div>
-                        <div class="img-placeholder-text">Backyard Patio</div>
-                        <div class="img-placeholder-sub">Outdoor seating • Sunset views • Signature cocktails</div>
-                    </div>
+                    <img src="site-images/patio-curtains.jpg" alt="Elegant outdoor patio with flowing curtains and string lights" loading="lazy">
                 </div>
                 <h3>Golden Hour</h3>
                 <p>As the sun sets, our beautiful backyard comes alive. Signature cocktails meet small bites as the music shifts and the energy gracefully elevates.</p>
@@ -2274,14 +2291,10 @@
             </div>
             <div class="vibe-card" data-animate>
                 <div class="vibe-image">
-                    <div class="img-placeholder">
-                        <div class="img-placeholder-icon">🥃</div>
-                        <div class="img-placeholder-text">Cocktail Lounge Interior</div>
-                        <div class="img-placeholder-sub">Premium bar • DJ booth • Lounge seating • Hookah area</div>
-                    </div>
+                    <img src="site-images/bar.jpg" alt="Sophisticated cocktail bar with chandeliers" loading="lazy">
                 </div>
-                <h3>Cocktail Lounge</h3>
-                <p>Premium spirits, expertly crafted cocktails, hookah, and live DJs. An upscale late-night destination with a sophisticated atmosphere.</p>
+                <h3>Hookah Lounge</h3>
+                <p>Premium hookah with curated tobacco flavors, velvet seating, and live DJs. The go-to late-night spot in Brooklyn for cocktails, shisha, and good company.</p>
                 <span class="vibe-time">9 PM — Late</span>
             </div>
         </div>
@@ -2291,13 +2304,13 @@
     <section class="cocktails-showcase" id="cocktails">
         <div class="section-header" data-animate>
             <div class="script">Crafted With Care</div>
-            <h2>Signature Cocktails</h2>
+            <h2>Cocktails & Hookah</h2>
             <div class="divider">
                 <div class="divider-line"></div>
                 <div class="divider-diamond"></div>
                 <div class="divider-line"></div>
             </div>
-            <p>An artful selection of house specialties and timeless classics</p>
+            <p>Hand-built cocktails and premium hookah — the two reasons Brooklyn comes here after dark</p>
         </div>
         <div class="cocktails-grid">
             <div class="cocktail-image-card" data-animate>
@@ -2365,25 +2378,15 @@
         </div>
         <div class="interior-grid">
             <div class="interior-img" data-animate>
-                <div class="img-placeholder">
-                    <div class="img-placeholder-icon">🖼️</div>
-                    <div class="img-placeholder-text">Main Lounge</div>
-                    <div class="img-placeholder-sub">Wide shot of the main bar and seating area</div>
-                </div>
+                <img src="site-images/godfather-wall.jpg" alt="Green velvet lounge seating beneath The Godfather movie wall" loading="lazy">
                 <div class="interior-img-label">Main Lounge</div>
             </div>
             <div class="interior-img" data-animate>
-                <div class="img-placeholder">
-                    <div class="img-placeholder-icon">🎵</div>
-                    <div class="img-placeholder-text">DJ Booth / Stage</div>
-                </div>
-                <div class="interior-img-label">DJ Booth</div>
+                <img src="site-images/fireplace-lounge.jpg" alt="Intimate seating by the brick fireplace with candles" loading="lazy">
+                <div class="interior-img-label">Fireside Seating</div>
             </div>
             <div class="interior-img" data-animate>
-                <div class="img-placeholder">
-                    <div class="img-placeholder-icon">🌿</div>
-                    <div class="img-placeholder-text">Backyard Patio</div>
-                </div>
+                <img src="site-images/patio-lounge.jpg" alt="Outdoor backyard lounge at night with string lights" loading="lazy">
                 <div class="interior-img-label">Backyard</div>
             </div>
         </div>
@@ -2662,20 +2665,20 @@
                 title: "Coffee & Tea",
                 subtitle: "Morning Selections",
                 items: [
-                    { name: "Espresso", desc: "Rich, bold, perfectly pulled shot", price: "$3" },
-                    { name: "Americano", desc: "Espresso with hot water, smooth finish", price: "$3" },
+                    { name: "Espresso", desc: "Rich, bold, perfectly pulled shot", price: "$3.5" },
+                    { name: "Americano", desc: "Espresso with hot water, smooth finish", price: "$3.5" },
                     { name: "Cappuccino", desc: "Equal parts espresso, steamed milk, and foam", price: "$5" },
                     { name: "Latte", desc: "Espresso with velvety steamed milk", price: "$5" },
                     { name: "Iced Coffee", desc: "Cold-brewed and refreshing", price: "$5" },
                     { name: "Iced Latte", desc: "Espresso over ice with cold milk", price: "$5" },
-                    { name: "Iced Cappuccino", desc: "Iced espresso with cold foam", price: "$5" },
-                    { name: "Caramel Latte", desc: "Latte with buttery caramel syrup", price: "$5" },
-                    { name: "Caramel Cappuccino", desc: "Cappuccino with caramel sweetness", price: "$5" },
-                    { name: "Chamomile Tea", desc: "Calming herbal infusion", price: "$12" },
-                    { name: "Minty Tea", desc: "Refreshing and aromatic", price: "$12" },
-                    { name: "Green Tea", desc: "Light and antioxidant-rich", price: "$12" },
-                    { name: "Black Tea", desc: "Bold and classic", price: "$12" },
-                    { name: "Fruit Tea", desc: "Sweet and fragrant blend", price: "$12" }
+                    { name: "Iced Cappuccino", desc: "Iced espresso with cold foam", price: "$5.5" },
+                    { name: "Caramel Latte", desc: "Latte with buttery caramel syrup", price: "$5.5" },
+                    { name: "Caramel Cappuccino", desc: "Cappuccino with caramel sweetness", price: "$5.5" },
+                    { name: "Chamomile Tea (Pot / Cup)", desc: "Calming herbal infusion", price: "$12 / $5" },
+                    { name: "Minty Tea (Pot / Cup)", desc: "Refreshing and aromatic", price: "$12 / $5" },
+                    { name: "Green Tea (Pot / Cup)", desc: "Light and antioxidant-rich", price: "$12 / $5" },
+                    { name: "Black Tea (Pot / Cup)", desc: "Bold and classic", price: "$12 / $5" },
+                    { name: "Fruit Tea (Pot / Cup)", desc: "Sweet and fragrant blend", price: "$12 / $5" }
                 ]
             },
             {
