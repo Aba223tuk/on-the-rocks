@@ -2194,7 +2194,7 @@
             <li><a href="#visit" class="mobile-link"><span class="number">09</span>Visit</a></li>
         </ul>
         <div class="mobile-menu-footer">
-            <a href="#reservation" class="mobile-menu-cta">Reserve a Table</a>
+            <a href="tel:+13476677331" class="mobile-menu-cta">Call to Reserve</a>
             <a href="tel:+13475877331" class="mobile-menu-cta" style="background: transparent; color: var(--gold); border: 1px solid var(--gold);">Call Us</a>
         </div>
     </div>
@@ -2530,74 +2530,20 @@
     <section class="reservation" id="reservation">
         <div class="section-header" data-animate>
             <div class="script">Book Your Visit</div>
-            <h2>Reservations</h2>
+            <h2>Call to Reserve</h2>
             <div class="divider">
                 <div class="divider-line"></div>
                 <div class="divider-diamond"></div>
                 <div class="divider-line"></div>
             </div>
-            <p>Reserve for morning coffee, evening cocktails, dance nights, or private events</p>
+            <p>Reservations by phone. Walk-ins welcome for cocktails and hookah.</p>
         </div>
-        <div class="reservation-container" data-animate>
-            <form class="reservation-form" id="reservationForm">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="guests">Guests</label>
-                    <select id="guests" name="guests" required>
-                        <option value="">Select...</option>
-                        <option value="1-2">1-2 Guests</option>
-                        <option value="3-4">3-4 Guests</option>
-                        <option value="5-6">5-6 Guests</option>
-                        <option value="7-10">7-10 Guests</option>
-                        <option value="10+">10+ (Private Event)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label for="time">Time</label>
-                    <select id="time" name="time" required>
-                        <option value="">Select...</option>
-                        <option value="morning">Morning (7 AM - 12 PM)</option>
-                        <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
-                        <option value="evening">Evening (5 PM - 9 PM)</option>
-                        <option value="night">Night (9 PM - Late)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="occasion">Occasion</label>
-                    <select id="occasion" name="occasion">
-                        <option value="">Optional</option>
-                        <option value="casual">Casual</option>
-                        <option value="work">Work/Study</option>
-                        <option value="date">Date Night</option>
-                        <option value="birthday">Birthday</option>
-                        <option value="business">Business</option>
-                        <option value="private">Private Event</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group full-width">
-                    <label for="requests">Special Requests</label>
-                    <textarea id="requests" name="requests" placeholder="Birthday cake? Specific seating? DJ requests?"></textarea>
-                </div>
-                <div class="form-submit">
-                    <button type="submit" class="btn-primary">Request Reservation</button>
-                </div>
-            </form>
+        <div class="reservation-call" data-animate>
+            <a href="tel:+13476677331" class="reservation-phone">
+                <span class="phone-icon">📞</span>
+                <span class="phone-number">(347) 667-7331</span>
+            </a>
+            <p class="reservation-note">For large groups, private events, and hookah reservations, call ahead. We hold tables for 15 minutes.</p>
         </div>
     </section>
 
@@ -2906,13 +2852,6 @@
         });
 
         renderMenu();
-
-        // Reservation form
-        document.getElementById('reservationForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your reservation request! We will contact you shortly to confirm.');
-            e.target.reset();
-        });
 
         // Burger menu
         const burger = document.getElementById('burger');
