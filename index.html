@@ -1256,6 +1256,32 @@
             transition: color 1.2s ease;
         }
 
+        .cocktails-grid-wrapper {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cocktails-grid-wrapper.collapsed .cocktail-image-card:nth-child(n+9) {
+            display: none;
+        }
+
+        .cocktails-grid-wrapper.collapsed::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 180px;
+            background: linear-gradient(to bottom, rgba(22, 19, 17, 0), var(--black-soft));
+            pointer-events: none;
+            transition: background 1.2s ease;
+        }
+
+        body.night-mode .cocktails-grid-wrapper.collapsed::after {
+            background: linear-gradient(to bottom, rgba(22, 19, 17, 0), var(--black));
+        }
+
         /* Menu Section */
         .menu {
             background: var(--black);
@@ -2393,11 +2419,11 @@
             </div>
             <div class="vibe-card" data-animate>
                 <div class="vibe-image">
-                    <img src="site-images/bar-girls.jpg" alt="Two guests enjoying cocktails at the On The Rocks bar" loading="lazy">
+                    <img src="site-images/bar-girls.jpg" alt="On The Rocks owners behind the bar" loading="lazy">
                 </div>
-                <h3>Behind the Bar</h3>
-                <p>Where the magic happens — our bartenders serve up signature cocktails and the warmest welcome in Brooklyn. Pull up a stool and stay awhile.</p>
-                <span class="vibe-time">All Night</span>
+                <h3>Meet the Owners</h3>
+                <p>The hearts behind On The Rocks — stop by and say hi. Whether it's your first visit or your hundredth, there's always a familiar face ready to pour you something special.</p>
+                <span class="vibe-time">Always Here</span>
             </div>
         </div>
     </section>
@@ -2414,7 +2440,8 @@
             </div>
             <p>Hand-built cocktails and premium hookah — the two reasons Brooklyn comes here after dark</p>
         </div>
-        <div class="cocktails-grid">
+        <div class="cocktails-grid-wrapper collapsed" id="cocktailsWrapper">
+            <div class="cocktails-grid">
             <div class="cocktail-image-card" data-animate>
                 <img src="site-images/drinks/mojito-new.jpg" alt="Mojito" loading="lazy">
                 <div class="cocktail-name">Mojito</div>
@@ -2495,6 +2522,10 @@
                 <img src="site-images/drinks/espresso-martini-purple.jpg" alt="Espresso Martini" loading="lazy">
                 <div class="cocktail-name">Espresso Martini</div>
             </div>
+            </div>
+        </div>
+        <div class="menu-controls" data-animate style="margin-top: 2.5rem;">
+            <button class="menu-control-btn" id="toggleCocktails">View All 20</button>
         </div>
     </section>
 
@@ -2978,6 +3009,14 @@
 
         document.getElementById('collapseAll').addEventListener('click', () => {
             document.querySelectorAll('.menu-category').forEach(cat => cat.classList.remove('active'));
+        });
+
+        // Cocktails showcase collapse/expand
+        const cocktailsWrapper = document.getElementById('cocktailsWrapper');
+        const cocktailsToggle = document.getElementById('toggleCocktails');
+        cocktailsToggle.addEventListener('click', () => {
+            const isCollapsed = cocktailsWrapper.classList.toggle('collapsed');
+            cocktailsToggle.textContent = isCollapsed ? 'View All 20' : 'Show Less';
         });
 
         renderMenu();
