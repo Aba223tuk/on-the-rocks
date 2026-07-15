@@ -1096,6 +1096,120 @@
             gap: 2rem;
         }
 
+        /* Heritage Section */
+        .heritage {
+            background: var(--black);
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(201, 169, 98, 0.06), transparent 60%),
+                radial-gradient(ellipse at 80% 100%, rgba(201, 169, 98, 0.04), transparent 60%);
+        }
+        .heritage-inner {
+            max-width: 920px;
+            margin: 0 auto;
+        }
+        .heritage-eyebrow {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .heritage-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+            font-weight: 500;
+            color: var(--cream);
+            letter-spacing: 0.04em;
+            margin: 0 0 1rem 0;
+        }
+        .heritage-subtitle {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+            color: var(--gold);
+            margin-bottom: 3.5rem;
+            font-weight: 400;
+        }
+        .heritage-lede {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+            line-height: 1.7;
+            color: var(--cream);
+            text-align: center;
+            font-style: italic;
+            margin: 0 auto 3.5rem auto;
+            max-width: 720px;
+        }
+        .heritage-timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 3.5rem;
+        }
+        .heritage-era {
+            text-align: center;
+            padding: 2.25rem 1.5rem;
+            border: 1px solid var(--subtle-line);
+            background: rgba(255, 255, 255, 0.015);
+            transition: all 0.4s ease;
+        }
+        .heritage-era:hover {
+            border-color: var(--gold);
+            background: rgba(201, 169, 98, 0.04);
+            transform: translateY(-4px);
+        }
+        .heritage-era-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+        .heritage-era-era {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+        .heritage-era-owners {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+        .heritage-body {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 1.4vw, 1.25rem);
+            line-height: 1.85;
+            color: var(--cream);
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 1.75rem auto;
+        }
+        .heritage-body em {
+            color: var(--gold);
+            font-style: italic;
+        }
+        .heritage-quote {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+            color: var(--gold);
+            margin: 3rem auto 0.5rem auto;
+            line-height: 1.4;
+        }
+        .heritage-closer {
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+            font-style: italic;
+            font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+            color: var(--cream);
+            margin-top: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
         .vibe-card {
             text-align: center;
             opacity: 0;
@@ -2230,6 +2344,8 @@
             .burger { display: block; }
 
             .vibe-gallery { grid-template-columns: 1fr; }
+            .heritage-timeline { grid-template-columns: 1fr; gap: 1.5rem; }
+            .heritage-closer { padding: 0 1rem; }
             .cocktails-grid { grid-template-columns: repeat(2, 1fr); }
             .interior-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
             .interior-img:nth-child(1) { grid-row: span 1; }
@@ -2305,13 +2421,14 @@
         <ul class="mobile-nav-links">
             <li><a href="#home" class="mobile-link"><span class="number">01</span>Home</a></li>
             <li><a href="#vibe" class="mobile-link"><span class="number">02</span>The Vibe</a></li>
-            <li><a href="#cocktails" class="mobile-link"><span class="number">03</span>Cocktails</a></li>
-            <li><a href="#interior" class="mobile-link"><span class="number">04</span>Interior</a></li>
-            <li><a href="#menu" class="mobile-link"><span class="number">05</span>Menu</a></li>
-            <li><a href="#events" class="mobile-link"><span class="number">06</span>Events</a></li>
-            <li><a href="#hookah" class="mobile-link"><span class="number">07</span>Hookah</a></li>
-            <li><a href="#reservation" class="mobile-link"><span class="number">08</span>Reserve</a></li>
-            <li><a href="#visit" class="mobile-link"><span class="number">09</span>Visit</a></li>
+            <li><a href="#heritage" class="mobile-link"><span class="number">03</span>Our Story</a></li>
+            <li><a href="#cocktails" class="mobile-link"><span class="number">04</span>Cocktails</a></li>
+            <li><a href="#interior" class="mobile-link"><span class="number">05</span>Interior</a></li>
+            <li><a href="#menu" class="mobile-link"><span class="number">06</span>Menu</a></li>
+            <li><a href="#events" class="mobile-link"><span class="number">07</span>Events</a></li>
+            <li><a href="#hookah" class="mobile-link"><span class="number">08</span>Hookah</a></li>
+            <li><a href="#reservation" class="mobile-link"><span class="number">09</span>Reserve</a></li>
+            <li><a href="#visit" class="mobile-link"><span class="number">10</span>Visit</a></li>
         </ul>
         <div class="mobile-menu-footer">
             <a href="tel:+12676665164" class="mobile-menu-cta">Call to Reserve</a>
@@ -2425,6 +2542,48 @@
                 <p>The hearts behind On The Rocks — stop by and say hi. Whether it's your first visit or your hundredth, there's always a familiar face ready to pour you something special.</p>
                 <span class="vibe-time">Always Here</span>
             </div>
+        </div>
+    </section>
+
+    <!-- Heritage / Our Story Section -->
+    <section class="heritage" id="heritage">
+        <div class="heritage-inner" data-animate>
+            <div class="heritage-eyebrow">A New Chapter of a Brooklyn Legend</div>
+            <h2 class="heritage-title">ON THE ROCKS LOUNGE</h2>
+            <p class="heritage-subtitle">— Our Story —</p>
+
+            <p class="heritage-lede">Some places are more than just a location. They carry memories, stories, and the spirit of generations.</p>
+
+            <div class="heritage-timeline">
+                <div class="heritage-era" data-animate>
+                    <div class="heritage-era-num">CHAPTER 01</div>
+                    <div class="heritage-era-era">The Italian Era</div>
+                    <div class="heritage-era-owners">Old-school Italian men<br>— the originals —</div>
+                </div>
+                <div class="heritage-era" data-animate>
+                    <div class="heritage-era-num">CHAPTER 02</div>
+                    <div class="heritage-era-era">The Albanian Era</div>
+                    <div class="heritage-era-owners">A new generation<br>kept the spirit alive</div>
+                </div>
+                <div class="heritage-era" data-animate>
+                    <div class="heritage-era-num">CHAPTER 03</div>
+                    <div class="heritage-era-era">The New Chapter</div>
+                    <div class="heritage-era-owners">Two women — a Georgian<br>and a Kazakh</div>
+                </div>
+            </div>
+
+            <p class="heritage-body">Located in Brooklyn, this iconic space has been part of the neighborhood's history for almost 90 years. Known for its connection to the waterfront and its old-school beachside atmosphere, this place was once a favorite gathering spot where locals came together to enjoy good drinks, conversations, and unforgettable moments.</p>
+
+            <p class="heritage-body">For decades, the bar lived through different generations, traditions, and owners. Originally known as <em>"My Father's Place,"</em> it became a part of Brooklyn's character — a place with its own soul and identity.</p>
+
+            <p class="heritage-body">Today, a new story begins.</p>
+
+            <p class="heritage-body">A Georgian and a Kazakh entrepreneur stepped into a traditionally male-dominated industry with a vision to preserve the legacy while creating something fresh and modern. They transformed the space into <em>On The Rocks Lounge</em> — bringing together history, culture, hospitality, and a completely new experience.</p>
+
+            <p class="heritage-body">A place where Brooklyn's past meets the energy of today: signature cocktails, premium hookah, coffee culture, music, events, and unforgettable nights.</p>
+
+            <p class="heritage-quote">"90 years of stories. A new generation of visionaries. One legendary place."</p>
+            <p class="heritage-closer">Welcome to On The Rocks Lounge.</p>
         </div>
     </section>
 
